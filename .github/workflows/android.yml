@@ -44,6 +44,11 @@ jobs:
         yes | sdkmanager --licenses || true
         sdkmanager "platform-tools" "platforms;android-31" "build-tools;30.0.3"
 
+    - name: Sync SDK to Buildozer path
+      run: |
+        mkdir -p .buildozer/android/platform
+        cp -r $HOME/android-sdk .buildozer/android/platform/android-sdk
+
     - name: Build APK
       run: buildozer -v android debug
 
@@ -52,3 +57,4 @@ jobs:
       with:
         name: kivy-apk
         path: bin/*.apk
+
