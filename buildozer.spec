@@ -20,6 +20,5 @@ android.minapi = 21
 android.ndk = 25b
 android.build_tools_version = 30.0.3
 android.permissions = INTERNET
+android.sdk_path = ~/.buildozer/android/platform/android-sdk
 
-# 이미지, 폰트 포함
-source.include_exts = py,png,jpg,kv,json,ttf
