@@ -18,7 +18,13 @@ accept_sdk_license = True
 android.api = 31
 android.minapi = 21
 android.ndk = 25b
+android.sdk_path = /home/runner/android-sdk
 android.build_tools_version = 30.0.3
-android.permissions = INTERNET
-android.sdk_path = ~/.buildozer/android/platform/android-sdk
-
+android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+android.debug = 1
+android.logcat_filters = *:S python:D
+android.enable_androidx = 1
+android.use_android_native_api = 0
+android.packaging.exclude_patterns = *.pyc, __pycache__
+android.additional_features = androidx
+android.allow_backup = 1
