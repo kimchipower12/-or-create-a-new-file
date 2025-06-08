@@ -44,6 +44,10 @@ jobs:
         yes | sdkmanager --licenses || true
         sdkmanager "platform-tools" "platforms;android-31" "build-tools;30.0.3"
 
+    - name: Check AIDL existence
+      run: |
+        find $HOME/android-sdk/build-tools -name aidl || echo "❌ aidl not found"
+
     - name: Sync SDK to Buildozer path
       run: |
         mkdir -p .buildozer/android/platform
