@@ -1,6 +1,8 @@
 name: Build Kivy APK
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -19,16 +21,25 @@ jobs:
     - name: Install build tools
       run: |
         sudo apt update
-        sudo apt install -y python3-pip build-essential git zip unzip openjdk-17-jdk
-        pip install --upgrade cython==0.29.33 buildozer
+        sudo apt install -y python3-pip build-essential git zip unzip openjdk-17-jdk libffi-dev libssl-dev
+        pip install --upgrade pip
+        pip install cython==0.29.33 buildozer
+
+    - name: Install Android SDK Build Tools 30.0.3
+      run: |
+        yes | sdkmanager "platform-tools" "platforms;android-31" "build-tools;30.0.3"
+
+    - name: Accept SDK licenses
+      run: yes | sdkmanager --licenses || true
+
+    - name: Initialize buildozer if needed
+      run: buildozer init || true
 
     - name: Build APK
-      run: |
-        buildozer init || true
-        buildozer android debug
+      run: buildozer -v android debug
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: kivy-apk
         path: bin/*.apk
