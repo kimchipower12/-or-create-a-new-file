@@ -29,9 +29,10 @@ jobs:
       run: |
         mkdir -p "$HOME/android-sdk/cmdline-tools"
         curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -o sdk.zip
-        unzip -q sdk.zip
-        mv cmdline-tools "$HOME/android-sdk/cmdline-tools/latest"
-        rm sdk.zip
+        unzip -q sdk.zip -d cmdline-tools-temp
+        mkdir -p "$HOME/android-sdk/cmdline-tools/latest"
+        mv cmdline-tools-temp/cmdline-tools/* "$HOME/android-sdk/cmdline-tools/latest/"
+        rm -rf cmdline-tools-temp sdk.zip
 
     - name: Set environment variables
       run: |
