@@ -17,7 +17,7 @@ warn_on_root = 0
 android.api = 31
 android.minapi = 21
 android.ndk = 25b
-android.build_tools_version = 30.0.3
+android.build_tools_version = 30.0.2
 android.permissions = INTERNET
 
 # 이미지, 폰트 포함
