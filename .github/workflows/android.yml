@@ -42,17 +42,18 @@ jobs:
 
     - name: Install build-tools 30.0.3
       run: |
-        yes | sdkmanager --licenses || true
-        sdkmanager "platform-tools" "platforms;android-31" "build-tools;30.0.3"
+        yes | sdkmanager --sdk_root="$HOME/android-sdk" --licenses || true
+        sdkmanager --sdk_root="$HOME/android-sdk" "platform-tools" "platforms;android-31" "build-tools;30.0.3"
 
     - name: Check AIDL existence
       run: |
         find $HOME/android-sdk/build-tools -name aidl || echo "❌ aidl not found"
+
     - name: Force override Buildozer SDK with ours
       run: |
         rm -rf .buildozer/android/platform/android-sdk
+        mkdir -p .buildozer/android/platform
         cp -r $HOME/android-sdk .buildozer/android/platform/android-sdk
-
 
     - name: Build APK
       run: buildozer -v android debug
